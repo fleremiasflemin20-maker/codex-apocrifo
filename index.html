@@ -131,6 +131,32 @@ select{background:var(--ink-2);color:var(--vellum);border:1px solid var(--rule);
 .b-mj{color:var(--gold)}
 .b-x{color:var(--alt);display:none}
 body.lens-alt .b-x{display:inline-block}
+/* ——— Imágenes ——— */
+.card-img{margin:-20px -20px 2px;height:150px;border-radius:16px 16px 0 0;overflow:hidden;position:relative;background:var(--ink-3)}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) brightness(.82);transition:transform .6s ease,filter .4s}
+.card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,color-mix(in srgb,var(--ink-2) 85%,transparent));pointer-events:none}
+.card:hover .card-img img{transform:scale(1.05);filter:saturate(1) brightness(.95)}
+.fig{margin:0;min-width:0}
+.fig img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--rule);background:var(--ink-3)}
+.fig figcaption{font-family:var(--f-mono);font-size:11px;line-height:1.45;color:var(--vellum-dim);margin-top:8px;letter-spacing:.02em}
+.fig figcaption b{color:var(--vellum);font-weight:500}
+.sheet-fig img{max-height:340px;object-fit:cover;object-position:center 30%}
+.sec-fig{width:320px;max-width:100%;justify-self:end}
+.sec-fig img{aspect-ratio:4/3;object-fit:cover;filter:saturate(.9);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+@media (max-width:720px){.sec-fig{justify-self:stretch;width:100%}.sec-fig img{aspect-ratio:16/9}}
+.bg-fig{max-width:420px}
+.bg-fig img{max-height:300px;object-fit:contain;background:var(--ink-3)}
+/* ——— Ver y escuchar ——— */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.media{display:flex;flex-direction:column;gap:8px;border:1px solid var(--rule);background:var(--ink-2);border-radius:14px;padding:18px;text-decoration:none;color:var(--vellum);transition:border-color .2s,transform .2s}
+.media:hover{border-color:var(--gold);transform:translateY(-2px)}
+.media h3{font-size:24px;font-weight:600}
+.media p{margin:0;color:var(--vellum-dim);font-size:15.5px}
+.media .mtop{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.media .kind{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vellum-dim)}
+.media .go{margin-top:auto;font-family:var(--f-mono);font-size:12px;color:var(--gold)}
+.tg{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:6px;padding:2px 7px}
+.tg.acad{color:var(--gold)}.tg.div{color:#7fc8e8}.tg.esc{color:var(--ok)}.tg.cre{color:var(--warn)}.tg.esp{color:var(--alt)}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--vellum-dim);border:1px dashed var(--rule);border-radius:16px}
 .empty b{display:block;font-family:var(--f-display);font-size:28px;color:var(--vellum);font-style:italic}
 
@@ -308,6 +334,7 @@ dialog[open] .sheet{animation:sheet .45s cubic-bezier(.2,.8,.2,1) both}
       <a href="#linajes">Linajes</a>
       <a href="#teorias">Teorías</a>
       <a href="#seres">Seres</a>
+      <a href="#ver">Ver y escuchar</a>
       <a href="#fuentes">Fuentes</a>
     </nav>
     <button class="lens" id="lens" type="button" aria-pressed="false" title="Muestra u oculta las interpretaciones de la teoría de los antiguos astronautas">
@@ -560,9 +587,22 @@ dialog[open] .sheet{animation:sheet .45s cubic-bezier(.2,.8,.2,1) both}
     </div>
   </section>
 
+  <section class="block" id="ver">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">VII · Ver y escuchar</p>
+          <h2>Canales y pódcast para seguir investigando</h2>
+          <p class="lede">Una selección de canales de YouTube, pódcast y programas que tratan los apócrifos, Enoc, los ángeles, la Biblia y la teoría de los antiguos astronautas. Cada uno lleva una etiqueta: <span class="tg acad">académico</span> si lo hace un especialista con método histórico, <span class="tg div">divulgativo</span>, <span class="tg esc">escéptico</span> si se dedica a comprobar afirmaciones, <span class="tg cre">creyente</span> si parte de una fe, y <span class="tg esp">especulativo</span> si defiende o difunde teorías sin respaldo académico. Los enlaces llevan a la página oficial de cada canal o programa.</p>
+        </div>
+      </div>
+      <div class="media-grid" id="media"></div>
+    </div>
+  </section>
+
   <section class="block" id="fuentes">
     <div class="wrap">
-      <p class="eyebrow">VII · Cómo leer este catálogo</p>
+      <p class="eyebrow">VIII · Cómo leer este catálogo</p>
       <h2>Fuentes, estados y lecturas</h2>
       <p class="lede">«Apócrifo» significa «oculto». Con el tiempo pasó a nombrar los libros que una iglesia no acepta en su Biblia, y la frontera cambia según la tradición: los deuterocanónicos son Escritura para católicos y ortodoxos, y 1 Enoc y Jubileos lo son para la Iglesia Ortodoxa Etíope. Las tablillas mesopotámicas y las cosmogonías de otras culturas no son apócrifos en sentido estricto; se incluyen porque son las fuentes que la teoría de los antiguos astronautas reinterpreta.</p>
       <div class="legend-grid">
@@ -1295,6 +1335,49 @@ const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 const norm = s => (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const byId = Object.fromEntries(DATA.map(t => [t.id, t]));
+/* ——— Imágenes: obras de dominio público (Metropolitan Museum of Art, Open Access CC0; NASA) ——— */
+const MET = "The Metropolitan Museum of Art, Nueva York (dominio público)";
+const IMGS = {
+  "anunciacion":    {f:"anunciacion", a:"El ángel Gabriel anuncia a María", o:"La Anunciación", by:"Sassetta (Stefano di Giovanni)", d:"1437–1444", m:MET},
+  "natividad":      {f:"natividad", a:"Grabado de la Natividad con el Niño en el pesebre", o:"Natividad", by:"Grabador italiano anónimo", d:"siglo XVI", m:MET},
+  "tobias":         {f:"tobias", a:"Tobías camina junto al arcángel Rafael", o:"Tobías y el ángel", by:"Davide Ghirlandaio", d:"c. 1479", m:MET},
+  "crucifixion":    {f:"crucifixion", a:"Xilografía de Cristo crucificado entre los dos ladrones", o:"La Crucifixión", by:"Lucas Cranach el Viejo", d:"1502", m:MET},
+  "san-andres":     {f:"san-andres", a:"Martirio del apóstol Andrés en la cruz en aspa", o:"Andrés, del Martirio de los doce apóstoles", by:"Lucas Cranach el Viejo", d:"c. 1512", m:MET},
+  "asuncion":       {f:"asuncion", a:"La Virgen asciende al cielo rodeada de coros de ángeles", o:"La Asunción de la Virgen", by:"Bernardo Daddi", d:"1337–1338", m:MET},
+  "ezequiel":       {f:"ezequiel", a:"Grabado de la visión de Ezequiel con Dios sobre los cuatro seres vivientes", o:"La visión de Ezequiel", by:"Giorgio Ghisi, según Rafael", d:"1554", m:MET},
+  "adan-eva":       {f:"adan-eva", a:"Adán y Eva junto al árbol del conocimiento con la serpiente", o:"Adán y Eva", by:"Alberto Durero", d:"1504", m:MET},
+  "maya":           {f:"estela-maya", a:"Vasija maya pintada con una escena mitológica", o:"Vasija con escena mitológica", by:"Artistas mayas", d:"600–800 d. C.", m:MET},
+  "rama":           {f:"rama", a:"Pintura india con una escena del Ramayana", o:"Página de un Ramayana disperso", by:"India", d:"primer cuarto del siglo XIX", m:MET},
+  "hokusai":        {f:"hokusai", a:"La gran ola de Kanagawa con el monte Fuji al fondo", o:"Bajo la ola de Kanagawa", by:"Katsushika Hokusai", d:"c. 1830–1832", m:MET},
+  "paracelso":      {f:"paracelso", a:"Retrato grabado de Paracelso", o:"Retrato de Teofrasto Paracelso", by:"Pieter van Sompel", d:"1615–1643", m:MET},
+  "magdalena":      {f:"magdalena", a:"Grabado de María Magdalena con el vaso de perfume", o:"María Magdalena", by:"Maestro I. E.", d:"c. 1490", m:MET},
+  "ultima-cena":    {f:"ultima-cena", a:"Jesús y los doce apóstoles en la Última Cena", o:"La Última Cena", by:"Bernard van Orley", d:"c. 1525–1528", m:MET},
+  "cratera":        {f:"cratera", a:"Crátera griega de figuras rojas", o:"Crátera de campana", by:"Pintor de Sarpedón", d:"c. 400–380 a. C.", m:MET},
+  "jinetes":        {f:"jinetes", a:"Los cuatro jinetes del Apocalipsis cabalgan sobre la humanidad", o:"Los cuatro jinetes, de El Apocalipsis", by:"Alberto Durero", d:"c. 1497–1498", m:MET},
+  "san-miguel":     {f:"san-miguel", a:"El arcángel Miguel y sus ángeles combaten al dragón", o:"San Miguel lucha contra el dragón, de El Apocalipsis", by:"Alberto Durero", d:"1498", m:MET},
+  "apkallu":        {f:"apkallu", a:"Figura asiria de apkallu alado con cabeza de pájaro", o:"Figura de apkallu con cabeza de pájaro", by:"Asiria", d:"siglos IX–VIII a. C.", m:MET},
+  "apkallu-aguila": {f:"apkallu-aguila", a:"Placa asiria con un apkallu de cabeza de águila", o:"Placa moldeada: apkallu con cabeza de águila", by:"Asiria", d:"siglos VIII–VII a. C.", m:MET},
+  "gema":           {f:"gema-gnostica", a:"Entalle de hematites con un genio alado", o:"Entalle mágico: genio alado", by:"Mundo romano", d:"siglo II d. C.", m:MET},
+  "naga":           {f:"naga", a:"Buda meditando bajo las cabezas de una serpiente naga", o:"Buda protegido por un naga", by:"Sudeste asiático", d:"siglo XII", m:MET},
+  "dogon":          {f:"dogon", a:"Gran máscara dogón alta y estrecha", o:"Imina na (gran máscara)", by:"Herreros dogones, Malí", d:"siglos XVIII–XIX", m:MET},
+  "libro-muertos":  {f:"libro-muertos", a:"Papiro egipcio pintado del Libro de los Muertos", o:"Libro de los Muertos de Nesiamun", by:"Egipto, Tercer Período Intermedio", d:"c. 1080–945 a. C.", m:MET},
+  "div":            {f:"div-blanco", a:"Miniatura persa: Rustam mata al Div Blanco", o:"Rustam mata al Div Blanco, folio de un Shahnama", by:"Irán", d:"c. 1330–1340", m:MET},
+  "etiope":         {f:"evangelio-etiope", a:"Manuscrito etíope iluminado en ge'ez", o:"Libro de los Evangelios", by:"Etiopía, tierras altas del norte", d:"finales del siglo XIV – comienzos del XV", m:MET},
+  "mapa-celeste":   {f:"mapa-celeste", a:"Mapa de las constelaciones del hemisferio norte", o:"Mapa celeste: hemisferio norte", by:"Alberto Durero", d:"1515", m:MET},
+  "jain":           {f:"mapa-jain", a:"Mapa cosmológico jain de los continentes del mundo", o:"Mapa cosmológico jain del Adhaidvipa", by:"India", d:"c. 1900", m:MET},
+  "tablilla":       {f:"tablilla", a:"Tablilla de arcilla con escritura cuneiforme", o:"Tablilla cuneiforme", by:"Mesopotamia", d:"c. 850–750 a. C.", m:MET},
+  "sello":          {f:"sello", a:"Sello cilíndrico mesopotámico", o:"Sello cilíndrico", by:"Mesopotamia", d:"siglos XVIII–XVI a. C.", m:MET},
+  "babel":          {f:"babel", a:"Grabado de la torre de Babel en espiral", o:"Turris Babel", by:"Athanasius Kircher", d:"1679", m:MET},
+  "pleyades":       {f:"pleyades", a:"Las Pléyades fotografiadas en infrarrojo", o:"Las Pléyades en infrarrojo", by:"Telescopio espacial Spitzer", d:"2007", m:"NASA/JPL-Caltech (dominio público)"},
+  "campo":          {f:"campo-profundo", a:"Miles de galaxias en el campo profundo del Hubble", o:"Campo profundo extremo del Hubble", by:"Telescopio espacial Hubble", d:"2012", m:"NASA, ESA"}
+};
+const CAT_IMG = {infancia:"anunciacion", gnosticos:"gema", evangelios:"crucifixion", hechos:"san-andres", apocalipsis:"jinetes", enoc:"san-miguel", pseudo:"adan-eva", deutero:"tobias", mesopotamia:"apkallu", cosmicos:"maya", mistica:"mapa-celeste", esotericos:"babel"};
+const TXT_IMG = {gilgamesh:"tablilla", atrahasis:"tablilla", "lista-real":"tablilla", "enuma-elish":"sello", "enki-ninhursag":"sello", "libro-muertos":"libro-muertos", piramides:"libro-muertos", "popol-vuh":"maya", teogonia:"cratera", ramayana:"rama", kojiki:"hokusai", "maria-magdalena":"magdalena", dormicion:"asuncion", transito:"asuncion", "liber-requiei":"asuncion", protoevangelio:"natividad", pseudomateo:"natividad", natividad:"natividad", tobias:"tobias", judas:"ultima-cena", "kebra-nagast":"etiope", "1enoc-vigilantes":"etiope", "1enoc-parabolas":"etiope", "1enoc-luminarias":"mapa-celeste", "1enoc-suenos":"etiope", "1enoc-epistola":"etiope", jubileos:"etiope", "ascension-isaias":"etiope", "apoc-pedro":"jinetes", sitchin:"apkallu-aguila", daniken:"ezequiel", "apocrifo-juan":"gema", bundahishn:"div"};
+const SEC_IMG = {canon:"etiope", mapa:"mapa-celeste", cronologia:"tablilla", linajes:"adan-eva", teorias:"ezequiel", seres:"campo"};
+const imgFor = t => IMGS[TXT_IMG[t.id] || CAT_IMG[t.c]];
+const figure = (im, cls) => `<figure class="fig ${cls}"><img src="img/${im.f}.jpg" alt="${im.a}" loading="lazy" decoding="async"><figcaption><b>${im.o}</b> · ${im.by} · ${im.d} · ${im.m}</figcaption></figure>`;
+const BEING_IMG = {"Los nueve coros de ángeles":"asuncion", "Eones de luz y arcontes":"gema", "Metatrón y los palacios del cielo":"ezequiel", "Ondinas, silfos, gnomos y salamandras":"paracelso", "Los djinn":"div", "Los espíritus de los otros planetas":"mapa-celeste", "Nórdicos y pleyadianos":"pleyades", "Reptilianos y dracos":"naga", "Anunnaki":"apkallu-aguila", "Sirianos y los Nommo":"dogon", "Agartha, la Tierra hueca y el Vril":"babel", "Los siete cielos":"mapa-celeste", "Lokas y planos de existencia":"jain", "Los muchos mundos de Everett":"campo", "El multiverso de la inflación y de las cuerdas":"campo"};
+
 const EXTRA_TXT = {kirk:{t:"Robert Kirk · La comunidad secreta de las hadas"}, "jerarquia-celeste":{t:"Pseudo-Dionisio · La jerarquía celeste"}, "coming-fairies":{t:"Arthur Conan Doyle · The Coming of the Fairies"}, flatland:{t:"Edwin A. Abbott · Flatland"}, "coming-race":{t:"Edward Bulwer-Lytton · The Coming Race"}};
 const CK = Object.keys(CATS);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1384,7 +1467,9 @@ function apply(){
 /* ——— Tarjetas ——— */
 function card(t, i){
   const cat = CATS[t.c];
+  const im = imgFor(t);
   return `<article class="card" data-id="${t.id}" tabindex="0" role="button" aria-label="${t.t}, ${t.d}" style="--cc:${cat.c};animation-delay:${Math.min(i,24)*25}ms">
+    ${im ? `<div class="card-img"><img src="img/${im.f}.jpg" alt="${im.a}" loading="lazy" decoding="async"></div>` : ""}
     <div class="card-top"><span class="cdot"></span><span class="card-cat">${cat.n}</span>
       <button class="fav" type="button" data-fav="${t.id}" aria-pressed="${state.favs.has(t.id)}" aria-label="Guardar en mi estante">${state.favs.has(t.id) ? "★" : "☆"}</button></div>
     <h3>${t.t}</h3>
@@ -1447,6 +1532,7 @@ function openModal(id, refresh){
       </div>
     </div>
     <div class="sheet-body">
+      ${(() => { const im = imgFor(t); return im ? figure(im, "sheet-fig") : ""; })()}
       <div><h4>Qué cuenta</h4><p>${t.r}</p></div>
       ${t.mj ? `<div class="box box-mj"><h4>Sobre María y Jesús</h4><p>${t.mj}</p></div>` : ""}
       <div class="box box-canon"><h4>Por qué quedó fuera del canon</h4><p>${CX[t.id] || CANON[t.c]}</p></div>
@@ -1863,6 +1949,7 @@ const BEINGS = [
   box.innerHTML = BEINGS.map((t,i) => `<div class="th" data-tp="${t.k}">
     <button type="button" aria-expanded="false" aria-controls="bg${i}"><span class="yr">${t.y}</span><span class="nm">${t.n}<small>${t.w}</small></span><span class="tp ${t.k}">${BGT[t.k]}</span></button>
     <div class="th-body" id="bg${i}">
+      ${BEING_IMG[t.n] ? `<div class="full">${figure(IMGS[BEING_IMG[t.n]], "bg-fig")}</div>` : ""}
       <div class="full"><h5>Qué se dice</h5><p>${t.t}</p></div>
       <div><h5>De dónde viene</h5><p>${t.o}</p></div>
       <div><h5>Textos y autores</h5><p>${t.s}</p></div>
@@ -1885,6 +1972,42 @@ const BEINGS = [
     $$(".th", box).forEach(el => el.hidden = sel.size && !sel.has(el.dataset.tp));
   });
 })();
+
+/* ——— Imágenes de cabecera de sección ——— */
+for (const [sec, k] of Object.entries(SEC_IMG)) {
+  const head = document.querySelector(`#${sec} .sec-head`); if (head && IMGS[k]) head.insertAdjacentHTML("beforeend", figure(IMGS[k], "sec-fig"));
+}
+/* ——— Ver y escuchar ——— */
+const MTAG = {acad:"académico", div:"divulgativo", esc:"escéptico", cre:"creyente", esp:"especulativo"};
+const MEDIA = [
+ {n:"ReligionForBreakfast", k:"Canal de YouTube · inglés", tg:["acad"], u:"https://www.youtube.com/@ReligionForBreakfast",
+  p:"Andrew Mark Henry, doctor por la Universidad de Boston y especialista en el cristianismo antiguo, explica con fuentes la historia de las religiones: apócrifos, magia antigua, ángeles y demonios, y cómo se formó la Biblia."},
+ {n:"Esoterica", k:"Canal de YouTube y pódcast · inglés", tg:["acad"], u:"https://www.youtube.com/@TheEsotericaChannel",
+  p:"Justin Sledge, doctor en filosofía, recorre la historia del esoterismo occidental: Enoc y los Vigilantes, la cábala, la Merkabá, el hermetismo, la alquimia, los grimorios y la teosofía, siempre desde los textos."},
+ {n:"Let's Talk Religion", k:"Canal de YouTube y pódcast · inglés", tg:["acad"], u:"https://shows.acast.com/lets-talk-religion",
+  p:"Filip Holm, estudioso de las religiones de Estocolmo, dedica episodios largos a místicos, herejías y tradiciones poco conocidas: gnósticos, maniqueos, sufíes, zoroastrismo y cábala."},
+ {n:"Dan McClellan", k:"Canal de YouTube · inglés", tg:["acad"], u:"https://www.youtube.com/@maklelan",
+  p:"Biblista con doctorado en Oxford. En vídeos cortos desmonta lo que «la Biblia no dice», incluidas muchas afirmaciones sobre Enoc, los nefilim y los textos «prohibidos»."},
+ {n:"Data Over Dogma", k:"Pódcast y canal de YouTube · inglés", tg:["acad"], u:"https://www.youtube.com/@dataoverdogma",
+  p:"Dan McClellan y Dan Beecher comentan cada semana la Biblia y su historia con datos académicos, sin perspectiva confesional."},
+ {n:"Misquoting Jesus with Bart Ehrman", k:"Pódcast · inglés", tg:["acad","div"], u:"https://podcasts.apple.com/us/podcast/misquoting-jesus-with-bart-ehrman/id1650657462",
+  p:"Bart Ehrman, uno de los especialistas en el Nuevo Testamento más leídos, conversa con Megan Lewis sobre el Jesús histórico, los evangelios perdidos, los apócrifos y el nacimiento del cristianismo."},
+ {n:"The Naked Bible Podcast", k:"Pódcast · inglés", tg:["cre","acad"], u:"https://nakedbiblepodcast.com",
+  p:"El biblista cristiano Michael S. Heiser (1963–2023) analizó en 479 episodios el «mundo invisible» de la Biblia: los hijos de Dios, los Vigilantes de Enoc, los nefilim y el consejo divino. Fue además un crítico detallado de Zecharia Sitchin."},
+ {n:"Miniminuteman", k:"Canal de YouTube · inglés", tg:["esc"], u:"https://www.youtube.com/@miniminuteman773",
+  p:"El arqueólogo divulgador Milo Rossi revisa con pruebas las afirmaciones de la pseudoarqueología: antiguos astronautas, gigantes, civilizaciones perdidas y la serie Ancient Aliens."},
+ {n:"Ancient Aliens", k:"Serie de televisión · History Channel · inglés", tg:["esp"], u:"https://www.history.com/shows/ancient-aliens",
+  p:"La serie que más ha difundido la idea de que los dioses y los ángeles de los textos antiguos eran visitantes extraterrestres. Útil para conocer las teorías; los historiadores rechazan sus conclusiones."},
+ {n:"Espacio en blanco", k:"Programa de radio y pódcast · RNE · español", tg:["esp","div"], u:"https://www.rtve.es/play/audios/espacio-en-blanco/",
+  p:"El programa de misterio de Radio Nacional de España, dirigido por Miguel Blanco desde 1983 en distintas emisoras. Trata ovnis, enigmas históricos, religiones y lo paranormal."},
+ {n:"La escóbula de la brújula", k:"Pódcast · español", tg:["div","esp"], u:"https://www.ivoox.com/en/podcast-escobula-brujula_sq_f169241_1.html",
+  p:"Jesús Callejo, Carlos Canales y su equipo charlan cada semana sobre historia, leyendas, mitos y misterios, con más rigor histórico que la mayoría de programas del género."},
+ {n:"Cuarto Milenio", k:"Programa de televisión · Cuatro · español", tg:["esp"], u:"https://www.cuatro.com/cuarto-milenio/",
+  p:"Iker Jiménez y Carmen Porter presentan desde 2005 el programa de misterio más popular de la televisión española: enigmas históricos, religión, ovnis y fenómenos paranormales."}
+];
+document.getElementById("media").innerHTML = MEDIA.map(m => `<a class="media" href="${m.u}" target="_blank" rel="noopener">
+  <div class="mtop">${m.tg.map(x => `<span class="tg ${x}">${MTAG[x]}</span>`).join("")}</div>
+  <h3>${m.n}</h3><span class="kind">${m.k}</span><p>${m.p}</p><span class="go">Abrir ↗</span></a>`).join("");
 
 /* ——— Formación del canon ——— */
 const CANON_TIME = [
